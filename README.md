@@ -23,7 +23,7 @@ Tự động gửi video TikTok hàng ngày đến danh sách bạn bè để du
 ```bash
 # Clone repo
 git clone https://github.com/minhquan247/daily-streak-tool-tiktok
-cd daily-streak-tool
+cd daily-streak-tool-tiktok
 
 # Tạo virtual environment
 python3 -m venv .venv
@@ -33,6 +33,7 @@ source .venv/bin/activate  # Linux/macOS
 # Cài dependencies
 pip install -r requirements.txt
 playwright install chromium
+playwright install-deps  # Bắt buộc trên Linux/Ubuntu
 ```
 
 ## Cấu hình
@@ -77,7 +78,7 @@ Tạo file `config.json` từ mẫu `config.example`:
 
 ## Sử dụng
 
-### Chạy UI (khuyến nghị)
+### Chạy UI (Máy tính cá nhân / Cài đặt ban đầu)
 
 ```bash
 python3 ui.py
@@ -89,11 +90,61 @@ python3 ui.py
 4. Tick chọn người muốn gửi
 5. Click **Start Sender**
 
-### Chạy trực tiếp
+### Chạy trực tiếp CLI
 
 ```bash
 python3 main.py
 ```
+
+---
+
+## 🐧 Hướng dẫn chạy trên Ubuntu VPS (Headless / CLI 24/7)
+
+### 1. Cài đặt trên VPS Ubuntu
+
+```bash
+# Update hệ thống & cài thư viện cần thiết
+sudo apt update && sudo apt install -y python3-pip python3-venv git tmux
+
+# Clone repo & truy cập thư mục
+git clone https://github.com/minhquan247/daily-streak-tool-tiktok.git
+cd daily-streak-tool-tiktok
+
+# Tạo môi trường ảo & cài đặt dependencies
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+playwright install chromium
+playwright install-deps  # ⚠️ Cài đặt các thư viện phụ thuộc hệ thống cho Chromium trên Ubuntu
+```
+
+### 2. Thiết lập cho VPS (Headless mode)
+
+Trong file `config.json` trên VPS, hãy đảm bảo đặt `"headless": true`:
+
+```json
+"tiktok": {
+  "headless": true
+}
+```
+
+Upload file `cookies.json` đã export từ máy cá nhân lên thư mục project trên VPS.
+
+### 3. Chạy ngầm 24/7 với `tmux`
+
+```bash
+# Mở session tmux mới
+tmux new -s tiktok
+
+# Kích hoạt môi trường và chạy script
+source .venv/bin/activate
+python3 main.py
+
+# Thoát màn hình tmux (script vẫn chạy ngầm): Nhấn Ctrl + B rồi nhấn D
+# Khi muốn mở lại xem log: tmux attach -t tiktok
+```
+
+---
 
 ## Lưu ý
 
