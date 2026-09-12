@@ -22,7 +22,7 @@ Tự động gửi video TikTok hàng ngày đến danh sách bạn bè để du
 
 ```bash
 # Clone repo
-git clone https://github.com/w111user/daily-streak-tool
+git clone https://github.com/minhquan247/daily-streak-tool-tiktok
 cd daily-streak-tool
 
 # Tạo virtual environment
