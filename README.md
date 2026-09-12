@@ -100,7 +100,25 @@ python3 main.py
 
 ## 🐧 Hướng dẫn chạy trên Ubuntu VPS (Headless / CLI 24/7)
 
-### 1. Cài đặt trên VPS Ubuntu
+### 💻 Cấu hình VPS đề xuất
+- **CPU**: 1 vCPU
+- **RAM**: 1 GB RAM (hoặc 2 GB)
+- **Disk**: 10 GB - 15 GB SSD
+- **OS**: Ubuntu 22.04 LTS / 24.04 LTS
+
+### 1. Tạo Swap RAM (Rất quan trọng cho VPS 1GB RAM)
+
+Để phòng trường hợp Chromium ngốn bộ nhớ lúc tải trang làm văng script, hãy tạo 2GB Swap RAM bằng các lệnh sau:
+
+```bash
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+
+### 2. Cài đặt trên VPS Ubuntu
 
 ```bash
 # Update hệ thống & cài thư viện cần thiết
@@ -118,7 +136,7 @@ playwright install chromium
 playwright install-deps  # ⚠️ Cài đặt các thư viện phụ thuộc hệ thống cho Chromium trên Ubuntu
 ```
 
-### 2. Thiết lập cho VPS (Headless mode)
+### 3. Thiết lập cho VPS (Headless mode)
 
 Trong file `config.json` trên VPS, hãy đảm bảo đặt `"headless": true`:
 
@@ -130,7 +148,7 @@ Trong file `config.json` trên VPS, hãy đảm bảo đặt `"headless": true`:
 
 Upload file `cookies.json` đã export từ máy cá nhân lên thư mục project trên VPS.
 
-### 3. Chạy ngầm 24/7 với `tmux`
+### 4. Chạy ngầm 24/7 với `tmux`
 
 ```bash
 # Mở session tmux mới
