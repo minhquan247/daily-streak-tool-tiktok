@@ -106,7 +106,7 @@ python3 main.py
 - **Disk**: 10 GB - 15 GB SSD
 - **OS**: Ubuntu 22.04 LTS / 24.04 LTS
 
-### 1. Tạo Swap RAM (Rất quan trọng cho VPS 1GB RAM)
+### 💡 Mẹo nhỏ tối ưu khi thuê VPS 1GB RAM (Tạo Swap RAM)
 
 Để phòng trường hợp Chromium ngốn bộ nhớ lúc tải trang làm văng script, hãy tạo 2GB Swap RAM bằng các lệnh sau:
 
